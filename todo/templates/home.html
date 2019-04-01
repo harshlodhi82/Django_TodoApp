@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo App</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: aliceblue;
+        }
+
+        header {
+            width: 100%;
+            background-color: #00324e;
+            color: aliceblue;
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 50px;
+        }
+
+        header h1 {
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        .cont {
+            width: 85%;
+            margin: auto;
+            margin-top: -35px;
+        }
+
+        .cont .input-todo {
+            margin: auto;
+            width: 100%;
+            display: block;
+        }
+
+        .cont .input-todo input[type="text"] {
+            color: #00324e;
+            font-weight: 800;
+            letter-spacing: 2px;
+            display: block;
+            padding: 15px;
+            border: solid 10px #00324e;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .cont .input-todo input[type="text"]:focus {
+            outline-width: 0;
+        }
+
+        .cont .input-todo input[type="submit"] {
+            color: #ffffff;
+            background-color: #00324e;
+            margin: auto;
+            border: none;
+            font-size: 1em;
+            font-family: sans-serif;
+            font-weight: 500;
+            padding: 10px 30px;
+            letter-spacing: 2px;
+            display: block;
+            box-sizing: border-box;
+        }
+
+        .cont .input-todo input[type="submit"]:hover {
+            color: #00324e;
+            padding: 10px 20px;
+            border-left: solid 10px #00324e;
+            border-right: solid 10px #00324e;
+            background-color: #ffffff;
+        }
+
+        .cont .todo-cont {
+            width: 100%;
+            background-color: #00324e;
+            color: #ffffff;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .cont .todo-cont h3 {
+            margin-top: 5px;
+            padding: 0px;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        .cont .todo-cont li {
+            font-family: sans-serif;
+            word-spacing: 2px;
+            letter-spacing: 1px;
+        }
+
+        .cont .todo-cont input[type="submit"] {
+            font-family: sans-serif;
+            letter-spacing: 1px;
+            padding: 5px 15px;
+            color: #00324e;
+            border: none;
+        }
+
+        .cont .todo-cont input[type="submit"]:hover {
+            background-color: #00324e;
+            color: #ff0909;
+            padding: 5px 10px;
+            border-left: solid 5px #ffffff;
+            border-right: solid 5px #ffffff;
+        }
+
+        .cont .todo-cont hr {
+            width: 100%;
+            margin-top: 20px 0 20px 0;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            padding: 1px;
+            
+        }
+
+        footer{
+            width: 100%;
+            background-color: #00324e;
+            text-align: center;
+            color: #ffffff;
+            font-size: 1em;
+            letter-spacing: 1px;
+            font-family: sans-serif;
+            padding: 20px;
+            margin-top:10px; 
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Todo App</h1>
+    </header>
+
+
+    <div class="cont">
+
+        <form class="input-todo" action="/a/" method="POST">{% csrf_token %}
+            <input type="text" placeholder="Enter Todo item" name="Enter" />
+            <input type="submit" value="Save" name="Submit" />
+        </form>
+        <br>
+        <div class="todo-cont">
+            <h3>Todo Items</h3>
+            <ol>
+                {% for items in todo_list %}
+                <li>
+                    <p class="item" name="items">{{ items.todo_items }} </p>
+
+                    <form action="/b/" method="POST">{% csrf_token %}
+                        <input type="hidden" name="items" value="{{items.id}}">
+                        <input type="submit" value="Delete" name="Delete" />
+                    </form>
+
+                    <hr>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Made By H4R5</p>
+    </footer>
+
+</body>
+
+</html>
